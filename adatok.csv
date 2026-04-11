@@ -1,4 +1,5 @@
 ﻿Race;Date;Distance;Type;Type_Long;Q time;Q.dif;%;Time;Fina;Rank
+;;;; m ;;;;;;
 Budapest Kupa III forduló;2026.04.11;200;vegyes;200 m vegyes;03:12.17;00:08.18;1,04257;03:03.99;318;5
 Budapest Kupa III forduló;2026.04.11;50;hát;50 m hát;00:40.77;-00:00.44;1,01079;00:40.33;295;6
 Budapest Kupa III forduló;2026.04.11;50;gyors;50 m gyors;00:34.41;00:00.29;1,00843;00:34.12;331;7
@@ -23,10 +24,10 @@ X. BVSC Őszi Kupa;2025.11.15;50;gyors;50 m gyors;00:37.17;-00:01.07;1,02879;00:
 X. BVSC Őszi Kupa;2025.11.15;100;hát;100 m hát;01:28.88;+01:01.19;0,98661;01:30.07;255;5
 X. BVSC Őszi Kupa;2025.11.15;50;hát;50 m hát;00:43.00;-00:01.08;1,02512;00:41.92;263;4
 X. BVSC Őszi Kupa;2025.11.15;100;gyors;100 m gyors;01:18.22;-00:00.88;1,01125;01:17.34;298;8
-III. Rövidpályás Buda Kupa ;2025.10.11;400;gyors;400 m gyors;00:00.00;+05:48.70;NA;05:48.70;287;9
-III. Rövidpályás Buda Kupa ;2025.10.11;50;hát;50 m hát;00:43.00;-00:01.17;1,02721;00:41.83;219;10
-III. Rövidpályás Buda Kupa ;2025.10.11;50;pille;50 m pille;00:40.11;-00:01.14;1,02842;00:38.97;231;9
-III. Rövidpályás Buda Kupa ;2025.10.11;100;gyors;100 m gyors;01:18.22;+00:00.55;0,99297;01:18.77;259;12
+III. Rövidpályás Buda Kupa ;2025.10.11;400;gyors-r;400 m gyors-r;00:00.00;+05:48.70;NA;05:48.70;287;9
+III. Rövidpályás Buda Kupa ;2025.10.11;50;hát-r;50 m hát-r;00:43.00;-00:01.17;1,02721;00:41.83;219;10
+III. Rövidpályás Buda Kupa ;2025.10.11;50;pille-r;50 m pille-r;00:40.11;-00:01.14;1,02842;00:38.97;231;9
+III. Rövidpályás Buda Kupa ;2025.10.11;100;gyors-r;100 m gyors-r;01:18.22;+00:00.55;0,99297;01:18.77;259;12
 Regionális Delfin Bajnokság (KM I-III.);2025.07.05;200;hát;200 m hát;03:10.09;-00:03.38;1,01778;03:06.71;286;2
 Regionális Delfin Bajnokság (KM I-III.);2025.07.05;100;gyors;100 m gyors;01:19.75;-00:01.53;1,01918;01:18.22;288;5
 Regionális Delfin Bajnokság (KM I-III.);2025.07.05;200;vegyes;200 m vegyes;03:13.01;-00:00.84;1,00435;03:12.17;282;6
@@ -80,9 +81,9 @@ IX. BVSC Őszi Kupa;2024.11.16;50;pille;50 m pille;00:44.98;-00:01.56;1,03468;00
 IX. BVSC Őszi Kupa;2024.11.16;100;mell;100 m mell;02:03.27;-00:09.68;1,07853;01:53.59;179;11
 IX. BVSC Őszi Kupa;2024.11.16;100;gyors;100 m gyors;01:29.39;-00:01.64;1,01835;01:27.75;204;11
 IX. BVSC Őszi Kupa;2024.11.16;200;hát;200 m hát;03:16.56;+00:05.50;0,97202;03:22.06;226;8
-II. Rövidpályás Buda Kupa;2024.10.12;100;gyors;100 m gyors;01:29.39;-00:01.63;1,01823;01:27.76;187;14
-II. Rövidpályás Buda Kupa;2024.10.12;100;hát;100 m hát;01:32.57;+00:03.84;0,95852;01:36.41;184;7
-II. Rövidpályás Buda Kupa;2024.10.12;200;gyors;200 m gyors;03:28.28;-00:17.01;1,08167;03:11.27;191;6
+II. Rövidpályás Buda Kupa;2024.10.12;100;gyors-r;100 m gyors-r;01:29.39;-00:01.63;1,01823;01:27.76;187;14
+II. Rövidpályás Buda Kupa;2024.10.12;100;hát-r;100 m hát-r;01:32.57;+00:03.84;0,95852;01:36.41;184;7
+II. Rövidpályás Buda Kupa;2024.10.12;200;gyors-r;200 m gyors-r;03:28.28;-00:17.01;1,08167;03:11.27;191;6
 Regionális Delfin Bajnokság (KM I-III.);2024.07.06;200;hát;200 m hát;03:24.88;;;03:16.56;251;2
 Regionális Delfin Bajnokság (KM I-III.);2024.07.06;100;gyors;100 m gyors;01:30.07;;;01:29.39;197;4
 Regionális Delfin Bajnokság (KM I-III.);2024.07.06;50;hát;50 m hát;00:44.43;;;00:44.05;231;2
@@ -127,6 +128,6 @@ VIII. BVSC Őszi Kupa;2023.11.11;100;hát;100 m hát;00:00.00;+01:48.47;;01:48.4
 VIII. BVSC Őszi Kupa;2023.11.11;100;mell;100 m mell;00:00.00;+02:08.74;;02:08.74;123;14
 VIII. BVSC Őszi Kupa;2023.11.11;50;hát;50 m hát;00:00.00;+00:49.65;;00:49.65;160;5
 VIII. BVSC Őszi Kupa;2023.11.11;100;gyors;100 m gyors;00:00.00;+01:46.56;;01:46.56;114;17
-I. Rövidpályás Buda Kupa;2023.10.10;50;mell;50 m mell;00:00.00;+01:00.53;;01:00.53;;13
-I. Rövidpályás Buda Kupa;2023.10.10;50;hát;50 m hát;00:00.00;+00:51.98;;00:51.98;;1
-I. Rövidpályás Buda Kupa;2023.10.10;50;gyors;50 m gyors;00:00.00;+00:48.02;;00:48.02;;14
+I. Rövidpályás Buda Kupa;2023.10.10;50;mell-r;50 m mell-r;00:00.00;+01:00.53;;01:00.53;;13
+I. Rövidpályás Buda Kupa;2023.10.10;50;hát-r;50 m hát-r;00:00.00;+00:51.98;;00:51.98;;1
+I. Rövidpályás Buda Kupa;2023.10.10;50;gyors-r;50 m gyors-r;00:00.00;+00:48.02;;00:48.02;;14
