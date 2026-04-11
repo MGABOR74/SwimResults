@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Úszóeredmény Kereső - CSV</title>
+    <title>Úszó Statisztika</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f4f8; display: flex; justify-content: center; padding: 20px; }
-        .container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
-        h1 { color: #1a73e8; text-align: center; margin-bottom: 25px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; color: #444; }
-        select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ced4da; font-size: 16px; margin-bottom: 20px; outline: none; }
-        select:focus { border-color: #1a73e8; }
-        .result-card { background: #f8f9fa; border-top: 4px solid #1a73e8; padding: 20px; border-radius: 8px; text-align: center; display: none; }
-        .time { font-size: 36px; font-weight: bold; color: #1a73e8; margin: 10px 0; }
-        .meta { color: #6c757d; font-size: 14px; line-height: 1.6; }
-        .loading { text-align: center; color: #666; font-style: italic; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f4f8; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 500px; margin-bottom: 20px; }
+        h1, h2 { color: #1a73e8; text-align: center; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ced4da; font-size: 16px; margin-bottom: 20px; }
+        
+        /* Eredmény kártya */
+        .result-card { background: #f8f9fa; border-left: 5px solid #1a73e8; padding: 20px; border-radius: 8px; text-align: center; display: none; }
+        .time { font-size: 32px; font-weight: bold; color: #1a73e8; }
+
+        /* Statisztika táblázat */
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
+        .stat-item { background: #fff; border: 1px solid #eee; padding: 10px; border-radius: 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .stat-rank { font-size: 12px; color: #666; text-transform: uppercase; }
+        .stat-count { font-size: 20px; font-weight: bold; color: #1a73e8; }
+        .gold { border-top: 4px solid #ffd700; } /* 1. hely */
+        .silver { border-top: 4px solid #c0c0c0; } /* 2. hely */
+        .bronze { border-top: 4px solid #cd7f32; } /* 3. hely */
     </style>
 </head>
 <body>
@@ -23,48 +31,50 @@
 <div class="container">
     <h1>🏆 Úszó Ranglista</h1>
     
-    <div id="loader" class="loading">Adatok betöltése a CSV fájlból...</div>
-    
-    <div id="mainContent" style="display:none;">
-        <label for="eventSelect">Válassz versenyszámot:</label>
+    <div id="mainContent">
+        <label>Válassz versenyszámot:</label>
         <select id="eventSelect" onchange="showBest()">
             <option value="">-- Válassz kategóriát --</option>
         </select>
 
         <div id="resultCard" class="result-card">
-            <div style="font-size: 14px; color: #1a73e8; text-transform: uppercase; font-weight: bold;">Legjobb eredmény</div>
+            <div style="font-size: 14px; color: #1a73e8; font-weight: bold;">LEGJOBB IDŐ</div>
             <div id="resTime" class="time"></div>
-            <div id="resMeta" class="meta"></div>
+            <div id="resMeta" style="color: #6c757d; font-size: 14px; line-height: 1.6;"></div>
         </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2>📊 Helyezések összesítve</h2>
+    <div class="stats-grid" id="statsGrid">
+        <div class="stat-item gold"><div class="stat-rank">1. hely</div><div id="rank1" class="stat-count">0</div></div>
+        <div class="stat-item silver"><div class="stat-rank">2. hely</div><div id="rank2" class="stat-count">0</div></div>
+        <div class="stat-item bronze"><div class="stat-rank">3. hely</div><div id="rank3" class="stat-count">0</div></div>
+        <div class="stat-item"><div class="stat-rank">4. hely</div><div id="rank4" class="stat-count">0</div></div>
+        <div class="stat-item"><div class="stat-rank">5. hely</div><div id="rank5" class="stat-count">0</div></div>
+        <div class="stat-item"><div class="stat-rank">6. hely</div><div id="rank6" class="stat-count">0</div></div>
     </div>
 </div>
 
 <script>
     let globalData = [];
 
-    // 1. CSV beolvasása (ügyelj rá, hogy a fájl neve adatok.csv legyen)
     Papa.parse("adatok.csv", {
         download: true,
         header: true,
-        encoding: "ISO-8859-2", // Ez kezeli a magyar ékezeteket Windows-os CSV esetén
         skipEmptyLines: true,
+        encoding: "windows-1250", 
         complete: function(results) {
             globalData = results.data;
             setupDropdown(results.data);
-            document.getElementById('loader').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
-        },
-        error: function() {
-            document.getElementById('loader').innerText = "Hiba: Az adatok.csv fájl nem tölthető be!";
+            calculateStats(results.data);
         }
     });
 
-    // 2. Legördülő menü feltöltése a "Type_Long" oszlop alapján
     function setupDropdown(data) {
         const select = document.getElementById('eventSelect');
-        // Kiszűrjük az egyedi versenyszámokat
         const uniqueEvents = [...new Set(data.map(item => item.Type_Long))].sort();
-        
         uniqueEvents.forEach(event => {
             if(event) {
                 let opt = document.createElement('option');
@@ -75,28 +85,46 @@
         });
     }
 
-    // 3. Legjobb eredmény kikeresése és megjelenítése
+    // ÚJ FUNKCIÓ: Helyezések kiszámolása
+    function calculateStats(data) {
+        const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+        
+        data.forEach(item => {
+            const r = parseInt(item.Rank);
+            if (r >= 1 && r <= 6) {
+                counts[r]++;
+            }
+        });
+
+        // Megjelenítés a HTML-ben
+        for (let i = 1; i <= 6; i++) {
+            document.getElementById(`rank${i}`).innerText = counts[i] + " db";
+        }
+    }
+
     function showBest() {
         const selected = document.getElementById('eventSelect').value;
         const card = document.getElementById('resultCard');
-        
         if (!selected) { card.style.display = 'none'; return; }
 
-        // Szűrés a választott kategóriára
         const filtered = globalData.filter(d => d.Type_Long === selected);
-        
-        // Sorbarendezés idő szerint (növekvő: a legkisebb idő a legjobb)
         filtered.sort((a, b) => a.Time.localeCompare(b.Time));
 
         const best = filtered[0];
-        
+
+        // Dátum javítása, ha szám maradt
+        let datum = best.Date;
+        if (!isNaN(datum) && datum.length > 4) {
+            const dateObj = new Date(Math.round((parseFloat(datum) - 25569) * 86400 * 1000));
+            datum = dateObj.toLocaleDateString('hu-HU');
+        }
+
         document.getElementById('resTime').innerText = best.Time;
         document.getElementById('resMeta').innerHTML = `
             <strong>Verseny:</strong> ${best.Race}<br>
-            <strong>Dátum:</strong> ${best.Date}<br>
+            <strong>Dátum:</strong> ${datum}<br>
             <strong>Helyezés:</strong> ${best.Rank}. hely
         `;
-        
         card.style.display = 'block';
     }
 </script>
